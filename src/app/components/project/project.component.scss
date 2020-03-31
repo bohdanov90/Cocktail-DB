@@ -1,5 +1,16 @@
-.project-wrapper {
+.project {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+  .main {
+    display: flex;
+  }
+
+    .filter {
+      display: flex;
+      flex-direction: column;
+      width: 327px;
+    }
