@@ -12,5 +12,8 @@
     .filter {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       width: 327px;
+      border: solid 1px red;
     }

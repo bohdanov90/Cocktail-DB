@@ -9,6 +9,7 @@ import { FilterItemComponent } from './components/filter-item/filter-item.compon
 import { FilterButtonComponent } from './components/filter-button/filter-button.component';
 import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
 import { ContentItemComponent } from './components/content-item/content-item.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ContentItemComponent } from './components/content-item/content-item.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

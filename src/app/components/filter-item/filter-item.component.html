@@ -1,4 +1,4 @@
-<div class="filter-item">
-  <div><input type="checkbox"></div>
-  <div class="text">BLABLABLA</div>
+<div class="filter-item" *ngFor="let filterItem of filterItems">
+  <div><label><input type="checkbox" checked></label></div>
+  <div class="text">{{filterItem.strCategory}}</div>
 </div>
