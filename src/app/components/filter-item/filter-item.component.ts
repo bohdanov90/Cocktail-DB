@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { FilterItem } from "../../interfaces/filter-item";
+import {FilterArray, FilterItem} from "../../interfaces/filter-item";
+import { HttpRequestsService } from "../../services/http-requests.service";
 
 @Component({
   selector: 'app-filter-item',
@@ -9,17 +9,46 @@ import { FilterItem } from "../../interfaces/filter-item";
 })
 export class FilterItemComponent implements OnInit {
 
-  filterItems: FilterItem[] = [];
+  // public filterItems = this.httpRequestService.createdFiltersArray;
 
-  constructor(private http: HttpClient) { }
+  public filterItems: Array<FilterItem> = [];
 
-  ngOnInit(): void {
-    this.http.get<FilterItem[]>('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
+
+  constructor(private httpRequestService: HttpRequestsService) {
+    this.fetchFilters();
+  }
+
+  ngOnInit() {
+    // this.fetchFilters();
+  }
+
+  fetchFilters() {
+    this.httpRequestService.getFilterItems()
       .subscribe(items => {
         console.log('Response', items);
-        this.filterItems = items.drinks;
+        this.filterItems = items['drinks'];
         console.log('Filter Items', this.filterItems);
-      })
+        return this.filterItems;
+      });
+    // console.log(this.filterItems);
+    // return this.filterItems;
   }
+
+  // addItems(arr) {
+  //   // console.log(this.filterItems);
+  //   if (this.filterItems.length) {
+  //     arr = [];
+  //     this.filterItems.forEach(el => {
+  //       // console.log(el.strCategory);
+  //       arr.push(el.strCategory);
+  //     })
+  //   }
+  //
+  //   // console.log('ARR', this.arr);
+  //   // console.log(this.createdFiltersArray);
+  //   console.log(this.filterItems);
+  //   console.log(arr);
+  //   return arr;
+  // }
 
 }

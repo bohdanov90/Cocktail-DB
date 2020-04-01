@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FilterButtonComponent} from "../filter-button/filter-button.component";
+import {ShareService} from "../../services/share.service";
 
 @Component({
   selector: 'app-content-heading',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentHeadingComponent implements OnInit {
 
-  constructor() { }
+  public arr2 = [];
 
-  ngOnInit(): void {
+  constructor(
+    public share: ShareService
+  ) {
+    this.share.shareOnClick.subscribe(item => this.arr2 = item);
   }
+
+  ngOnInit() {}
 
 }
