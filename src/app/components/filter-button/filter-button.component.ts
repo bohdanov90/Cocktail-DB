@@ -15,7 +15,7 @@ export class FilterButtonComponent implements OnInit {
   @Output() onAdd:EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private share: ShareService
+    private share: ShareService,
   ) {
     this.share.shareOnClick.subscribe(item => this.arr1 = item);
   }

@@ -13,6 +13,10 @@ export class HttpRequestsService {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   }
 
+  getContent() {
+    return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=`${drinkName}`')
+  }
+
   // addItems() {
   //   console.log(this.filterItems);
   //   if (this.filterItems.length) {

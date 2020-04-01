@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FilterArray, FilterItem} from "../../interfaces/filter-item";
 import { HttpRequestsService } from "../../services/http-requests.service";
+import {ShareService} from "../../services/share.service";
 
 @Component({
   selector: 'app-filter-item',
@@ -12,43 +13,43 @@ export class FilterItemComponent implements OnInit {
   // public filterItems = this.httpRequestService.createdFiltersArray;
 
   public filterItems: Array<FilterItem> = [];
+  // public isChecked = true;
+  // public random = Math.random();
+  // @ViewChild('ref', {static: false}) isCheckedRef: ElementRef;
 
 
-  constructor(private httpRequestService: HttpRequestsService) {
+  constructor(
+    private httpRequestService: HttpRequestsService,
+    private share: ShareService
+  ) {
     this.fetchFilters();
   }
 
   ngOnInit() {
-    // this.fetchFilters();
+    // this.checkAllItems();
   }
 
   fetchFilters() {
     this.httpRequestService.getFilterItems()
       .subscribe(items => {
-        console.log('Response', items);
         this.filterItems = items['drinks'];
-        console.log('Filter Items', this.filterItems);
+        this.filterItems.forEach(el => el.checked = true);
+        // console.log(this.filterItems);
         return this.filterItems;
       });
     // console.log(this.filterItems);
     // return this.filterItems;
   }
 
-  // addItems(arr) {
-  //   // console.log(this.filterItems);
-  //   if (this.filterItems.length) {
-  //     arr = [];
-  //     this.filterItems.forEach(el => {
-  //       // console.log(el.strCategory);
-  //       arr.push(el.strCategory);
-  //     })
-  //   }
-  //
-  //   // console.log('ARR', this.arr);
-  //   // console.log(this.createdFiltersArray);
-  //   console.log(this.filterItems);
-  //   console.log(arr);
-  //   return arr;
+  fetchContent() {
+
+  }
+
+  // checkAllItems() {
+  //   this.filterItems.forEach(el => el.checked = true);
   // }
 
+  checkItemNew(id) {
+    return this.share.checkItem(id);
+  }
 }

@@ -14,7 +14,11 @@ export class ContentHeadingComponent implements OnInit {
   constructor(
     public share: ShareService
   ) {
-    this.share.shareOnClick.subscribe(item => this.arr2 = item);
+    this.share.shareOnClick.subscribe(item => {
+      this.arr2 = item.filter( el => {
+        return el.checked === true;
+      });
+    });
   }
 
   ngOnInit() {}
