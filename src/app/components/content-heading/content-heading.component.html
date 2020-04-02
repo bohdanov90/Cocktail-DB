@@ -1,6 +1,8 @@
 <!--<app-filter-button *ngFor="let item of createdFiltersArray" (onAdd)="addNewItems($event)">{{item}}></app-filter-button>-->
 
-<div *ngFor="let item of arr2">{{item.strCategory.toString()}}</div>
+<div *ngFor="let item of arr2">
+  {{item.strCategory.toString()}}
+</div>
 
 <button style="width:30px;height: 30px" (click)="fetchNew('Cocktail')"></button>
 
@@ -11,3 +13,16 @@
 <!--</div>-->
 <hr>
 <div>НЕЛЬЗЯ ВЫЗЫВАТЬ АССИНХР ФУНКЦИЮ свитчем или ифом</div>
+
+<button style="width:150px;height:150px;color:red;background-color: blue" (click)="clickMe()"></button>
+
+<!--<div *ngFor="let i of category">-->
+
+<!--  <strong>{{i}}</strong>-->
+  <div *ngFor="let i of contentItems">
+    {{i.strDrink.toString()}}
+<!--    <img src="{{i.strDrinkThumb}}" alt="">-->
+  </div>
+<!--</div>-->
+
+<!--<div *ngIf="category[0]">111111111111111111</div>-->

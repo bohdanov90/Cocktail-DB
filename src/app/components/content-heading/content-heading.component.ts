@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FilterButtonComponent} from "../filter-button/filter-button.component";
 import {ShareService} from "../../services/share.service";
 import {HttpRequestsService} from "../../services/http-requests.service";
+import { FilterItemComponent } from "../filter-item/filter-item.component";
 
 @Component({
   selector: 'app-content-heading',
@@ -17,6 +18,7 @@ export class ContentHeadingComponent implements OnInit {
   constructor(
     public share: ShareService,
     public httpRequestService: HttpRequestsService,
+    public filterItemComponent: FilterItemComponent,
   ) {
     this.checkAllItemsToTrue();
     // console.log(this.category);
@@ -33,7 +35,12 @@ export class ContentHeadingComponent implements OnInit {
       this.arr2 = item.filter( el => {
         return el.checked === true;
       });
+      console.log(this.arr2);
     });
+  }
+
+  fetchFromImport() {
+    return this.filterItemComponent.fetchFilters();
   }
 
   fetchNew(category) {
@@ -58,6 +65,10 @@ export class ContentHeadingComponent implements OnInit {
         this.contentItems = items['drinks'];
         console.log(this.contentItems);
       })
+  }
+
+  clickMe() {
+    this.share.shareDoCLick();
   }
 
 }
