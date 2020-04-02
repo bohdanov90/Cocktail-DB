@@ -13,6 +13,7 @@ export class FilterItemComponent implements OnInit {
   // public filterItems = this.httpRequestService.createdFiltersArray;
 
   public filterItems: Array<FilterItem> = [];
+
   // public isChecked = true;
   // public random = Math.random();
   // @ViewChild('ref', {static: false}) isCheckedRef: ElementRef;
@@ -39,10 +40,6 @@ export class FilterItemComponent implements OnInit {
       });
     // console.log(this.filterItems);
     // return this.filterItems;
-  }
-
-  fetchContent() {
-
   }
 
   // checkAllItems() {

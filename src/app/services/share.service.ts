@@ -8,6 +8,7 @@ import { FilterItemComponent } from "../components/filter-item/filter-item.compo
 export class ShareService {
 
   public arr = [];
+  public categoryArray = [];
   // public isChecked1 = this.filterItemComponent.isChecked;
 
   shareOnClick: EventEmitter<any> = new EventEmitter();
@@ -19,18 +20,24 @@ export class ShareService {
     this.fetch();
   }
 
+  categoryArrayMaking() {
+    this.categoryArray = this.arr.map(el => el.strCategory);
+    return this.categoryArray;
+  }
+
   fetch() {
-    this.httpRequestService.getFilterItems()
+    return this.httpRequestService.getFilterItems()
       .subscribe(items => {
         // console.log(this.isChecked1);
         this.arr = items['drinks'];
         this.arr.forEach(el => el.checked = true);
-        // console.log(this.arr);
-        return this.arr;
+        // return this.arr;
+        this.categoryArrayMaking();
       });
   }
 
   checkItem(id) {
+    // console.log(this.categoryArray);
     this.arr[id].checked = !this.arr[id].checked;
     // console.log(this.arr);
     // console.log(this.arr[id].checked);

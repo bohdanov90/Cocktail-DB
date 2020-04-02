@@ -1,3 +1,13 @@
 <!--<app-filter-button *ngFor="let item of createdFiltersArray" (onAdd)="addNewItems($event)">{{item}}></app-filter-button>-->
 
 <div *ngFor="let item of arr2">{{item.strCategory.toString()}}</div>
+
+<button style="width:30px;height: 30px" (click)="fetchNew('Cocktail')"></button>
+
+<!--<div [ngSwitch]="fetchNew(category[1])">-->
+<!--  <div *ngSwitchCase="'Cocktail'">111111111111111111111</div>-->
+<!--  <div *ngSwitchCase="'bbbbbbbbbb'">2222222222222222222</div>-->
+<!--  <div *ngSwitchDefault>3333333333333333333333333333</div>-->
+<!--</div>-->
+<hr>
+<div>НЕЛЬЗЯ ВЫЗЫВАТЬ АССИНХР ФУНКЦИЮ свитчем или ифом</div>

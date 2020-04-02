@@ -7,14 +7,16 @@ import {HttpClient} from "@angular/common/http";
 })
 export class HttpRequestsService {
 
+  // public drinkCategory: string;
+
   constructor(private http: HttpClient) { }
 
   getFilterItems() {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   }
 
-  getContent() {
-    return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=`${drinkName}`')
+  getContentItems(drinkCategory) {
+    return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`);
   }
 
   // addItems() {
