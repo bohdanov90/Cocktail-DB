@@ -26,9 +26,10 @@ export class ContentHeadingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.checkAllItemsToTrue();
+    this.checkAllItemsToTrue().subscribe();
     this.displayingContent().subscribe();
   }
+
   displayingContent() {
     return this.httpRequestService.getContentItems('Shot')
       .pipe(map(data => {
@@ -40,12 +41,13 @@ export class ContentHeadingComponent implements OnInit {
   }
 
   checkAllItemsToTrue() {
-    return this.share.shareOnClick.subscribe(item => {
-      this.arr2 = item.filter( el => {
-        return el.checked === true;
-      });
-      console.log(this.arr2);
-    });
+    return this.share.shareOnClick
+      .pipe(map(item => {
+        this.arr2 = item.filter( el => {
+          return el.checked === true;
+        });
+        console.log(this.arr2);
+      }))
   }
 
   fetchFromImport() {

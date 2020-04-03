@@ -36,7 +36,6 @@ export class FilterItemComponent implements OnInit {
   // }
 
   checkItemNew(id) {
-    // console.log(this.share.arr);
     return this.share.checkItem(id);
   }
 

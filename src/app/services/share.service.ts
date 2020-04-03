@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { HttpRequestsService } from "./http-requests.service";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,22 @@ export class ShareService {
   constructor(
     private httpRequestService: HttpRequestsService,
   ) {
-    this.fetch();
+    this.fetch().subscribe();
+    this.categoryArrayMaking();
+  }
+
+  fetch() {
+    return this.httpRequestService.getFilterItems()
+      .pipe(map(items => {
+        this.arr = items['drinks'];
+        this.arr.forEach(el => el.checked = true);
+        return this.arr;
+      }))
   }
 
   categoryArrayMaking() {
     this.categoryArray = this.arr.map(el => el.strCategory);
     return this.categoryArray;
-  }
-
-  fetch() {
-    return this.httpRequestService.getFilterItems()
-      .subscribe(items => {
-        this.arr = items['drinks'];
-        this.arr.forEach(el => el.checked = true);
-        this.categoryArrayMaking();
-      });
   }
 
   checkItem(id) {
