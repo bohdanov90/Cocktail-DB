@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpRequestsService } from "../../services/http-requests.service";
+import { ShareService } from "../../services/share.service";
 
 @Component({
   selector: 'app-project',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectComponent implements OnInit {
 
-  constructor() { }
+  contentItems = [];
+  array = [];
+
+  constructor(
+    private httpRequestsService: HttpRequestsService,
+    private shareService: ShareService
+  ) { }
 
   ngOnInit(): void {
+    this.array = this.shareService.arr;
+    console.log(this.array);
+  }
+
+  fetchContent(category) {
+    return this.httpRequestsService.getContentItems(category)
+      .subscribe(items => {
+        console.log(items);
+        this.contentItems = items['drinks'];
+        console.log(this.contentItems);
+      })
   }
 
 }

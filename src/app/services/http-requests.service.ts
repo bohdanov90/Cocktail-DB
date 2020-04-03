@@ -15,9 +15,21 @@ export class HttpRequestsService {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   }
 
-  getContentItems(drinkCategory) {
+  getContentItems(drinkCategory: string) {
     return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`);
   }
+
+
+  // getUsers() : Observable<User[]> {
+  //   return this.http.get('assets/users.json')
+  //     .pipe(map(data=>{
+  //     let usersList = data["userList"];
+  //     return usersList.map(function(user:any) {
+  //       return {name: user.userName, age: user.userAge};
+  //     });
+  //   }));
+  // }
+
 
   // addItems() {
   //   console.log(this.filterItems);
