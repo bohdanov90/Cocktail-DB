@@ -19,11 +19,11 @@ export class FilterButtonComponent implements OnInit {
   constructor(
     private share: ShareService,
     private httpRequestsService: HttpRequestsService,
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.share.shareOnClick.subscribe(item => this.arr1 = item);
   }
-
-  ngOnInit(): void {}
 
   clickMe() {
     this.share.shareDoCLick();

@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FilterButtonComponent} from "../filter-button/filter-button.component";
 import {ShareService} from "../../services/share.service";
 import {HttpRequestsService} from "../../services/http-requests.service";
 import { FilterItemComponent } from "../filter-item/filter-item.component";
-import {map, switchMap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-content-heading',
   templateUrl: './content-heading.component.html',
   styleUrls: ['./content-heading.component.scss']
 })
+
 export class ContentHeadingComponent implements OnInit {
 
   public arr2 = [];
@@ -23,20 +23,12 @@ export class ContentHeadingComponent implements OnInit {
     public share: ShareService,
     public httpRequestService: HttpRequestsService,
     public filterItemComponent: FilterItemComponent,
-  ) {
-
-    // console.log(this.category);
-    // console.log(this.share.categoryArray);
-    // ЗДЕСЬ ИДЕТ РАЗРЫВ!!!!!!!!!!!!!!!!! НЕ ВИДИМ ИЗМЕНЕННЫЙ МАССИВ category
-  }
+  ) {}
 
   ngOnInit() {
-    // this.fetchNew(this.category[0]);
     this.checkAllItemsToTrue();
     this.displayingContent().subscribe();
   }
-
-
   displayingContent() {
     return this.httpRequestService.getContentItems('Shot')
       .pipe(map(data => {
@@ -44,11 +36,8 @@ export class ContentHeadingComponent implements OnInit {
         this.arrayOfContentItems.forEach(el => this.strDrink.push(el['strDrink']));
         console.log(this.strDrink);
         return this.strDrink;
-      }));
-    // this.arrayOfContentItems.pipe(map(data => data.map(el => this.titles.push(el['strDrink']))));
-
+      }))
   }
-
 
   checkAllItemsToTrue() {
     return this.share.shareOnClick.subscribe(item => {

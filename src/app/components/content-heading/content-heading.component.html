@@ -1,5 +1,3 @@
-<!--<app-filter-button *ngFor="let item of createdFiltersArray" (onAdd)="addNewItems($event)">{{item}}></app-filter-button>-->
-
 <div *ngFor="let item of arr2">
   <div><strong>{{item.strCategory.toString()}}</strong></div>
 </div>
@@ -9,35 +7,3 @@
 <div *ngFor="let i of strDrink">
   <div>{{ i }}</div>
 </div>
-
-
-
-
-
-
-<!--<div *ngFor="let i of arr2">-->
-<!--&lt;!&ndash;  <button style="width:30px;height: 30px" (click)="fetchContent(i.strCategory.toString())"></button>&ndash;&gt;-->
-<!--</div>-->
-
-<!--<div [ngSwitch]="fetchNew(category[1])">-->
-<!--  <div *ngSwitchCase="'Cocktail'">111111111111111111111</div>-->
-<!--  <div *ngSwitchCase="'bbbbbbbbbb'">2222222222222222222</div>-->
-<!--  <div *ngSwitchDefault>3333333333333333333333333333</div>-->
-<!--</div>-->
-
-
-<!--<hr>-->
-<!--<div>НЕЛЬЗЯ ВЫЗЫВАТЬ АССИНХР ФУНКЦИЮ свитчем или ифом</div>-->
-
-<!--<button style="width:150px;height:150px;color:red;background-color: blue" (click)="clickMe()"></button>-->
-
-<!--<div *ngFor="let i of category">-->
-
-<!--  <strong>{{i}}</strong>-->
-<!--  <div *ngFor="let i of contentItems">-->
-<!--    {{i.strDrink.toString()}}-->
-<!--&lt;!&ndash;    <img src="{{i.strDrinkThumb}}" alt="">&ndash;&gt;-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div *ngIf="category[0]">111111111111111111</div>-->
