@@ -3,12 +3,12 @@ import { HttpRequestsService } from '../../services/http-requests.service';
 import { ShareService } from '../../services/share.service';
 
 @Component({
-  selector: 'app-filter-item',
-  templateUrl: './filter-item.component.html',
-  styleUrls: ['./filter-item.component.scss']
+  selector: 'app-filter',
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.scss']
 })
 
-export class FilterItemComponent implements OnInit {
+export class FilterComponent implements OnInit {
 
   public filterItems;
 

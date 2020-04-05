@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectComponent } from './project.component';
-import { FilterItemComponent } from '../filter-item/filter-item.component';
+import { FilterComponent } from '../filter/filter.component';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -9,7 +9,7 @@ describe('ProjectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectComponent, FilterItemComponent ]
+      declarations: [ ProjectComponent, FilterComponent ]
     })
     .compileComponents();
   }));

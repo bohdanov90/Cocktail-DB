@@ -4,12 +4,12 @@ import {HttpRequestsService} from '../../services/http-requests.service';
 import {map} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-content-heading',
-  templateUrl: './content-heading.component.html',
-  styleUrls: ['./content-heading.component.scss']
+  selector: 'app-content',
+  templateUrl: './content.component.html',
+  styleUrls: ['./content.component.scss']
 })
 
-export class ContentHeadingComponent implements OnInit {
+export class ContentComponent implements OnInit {
 
   public filterItems;
   public contentItemsArray = [];
