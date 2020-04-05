@@ -22,11 +22,12 @@
       justify-content: flex-start;
       align-items: center;
       width: 25%;
+      border-right: 1px solid #D0D0D0;
     }
 
       .filter-bar {
         position: fixed;
-        margin-top: 30px;
+        margin-top: 20px;
       }
 
     .content {

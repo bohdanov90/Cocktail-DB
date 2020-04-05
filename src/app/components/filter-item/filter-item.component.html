@@ -1,12 +1,14 @@
-<div class="filter-item" *ngFor="let filterItem of filterItems; let i = index">
-  <div>
-    <label>
-      <input type="checkbox" [(ngModel)]="filterItem.checked" (click)="markFilterItem(i)">
-    </label>
-  </div>
-  <div class="text">{{filterItem.strCategory}}</div>
-</div>
+<div class="container">
 
-<div class="filter-button">
-  <button (click)="onButtonClick()">Apply</button>
+  <div class="filter-item" *ngFor="let filterItem of filterItems; let i = index">
+    <div class="input">
+      <label><input type="checkbox" [(ngModel)]="filterItem.checked" (click)="markFilterItem(i)"></label>
+    </div>
+    <div class="text">{{filterItem.strCategory}}</div>
+  </div>
+
+  <div class="filter-button">
+    <button class="btn" (click)="onButtonClick()">Apply</button>
+  </div>
+
 </div>
