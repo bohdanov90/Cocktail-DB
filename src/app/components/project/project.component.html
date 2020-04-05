@@ -3,10 +3,17 @@
   <div class="main">
     <div class="filter">
       <app-filter-item></app-filter-item>
-      <app-filter-button></app-filter-button>
+      <app-filter-button
+        (buttonClick)="tempFunc($event)"
+      ></app-filter-button>
     </div>
     <div class="content">
-      <app-content-heading></app-content-heading>
+      <app-content-heading
+        [ngClass]="{
+          visible: visible,
+          hidden: hidden
+        }"
+      ></app-content-heading>
       <app-content-item></app-content-item>
     </div>
   </div>

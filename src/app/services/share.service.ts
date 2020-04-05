@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { HttpRequestsService } from "./http-requests.service";
 import {map} from "rxjs/operators";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,39 +9,19 @@ import {map} from "rxjs/operators";
 
 export class ShareService {
 
-  public arr = [];
-  public categoryArray = [];
-
-  shareOnClick: EventEmitter<any> = new EventEmitter();
+  public subject = new Subject();
+  public subj: Observable<any> = new Subject();
 
   constructor(
     private httpRequestService: HttpRequestsService,
-  ) {
-    this.fetch().subscribe();
-    this.categoryArrayMaking();
+  ) {}
+
+  passAnArray(arr) {
+    this.subject.next(arr);
   }
 
-  fetch() {
-    return this.httpRequestService.getFilterItems()
-      .pipe(map(items => {
-        this.arr = items['drinks'];
-        this.arr.forEach(el => el.checked = true);
-        return this.arr;
-      }))
-  }
-
-  categoryArrayMaking() {
-    this.categoryArray = this.arr.map(el => el.strCategory);
-    return this.categoryArray;
-  }
-
-  checkItem(id) {
-    this.arr[id].checked = !this.arr[id].checked;
-    return this.arr;
-  }
-
-  public shareDoCLick() {
-    this.shareOnClick.emit(this.arr);
+  getAnArray() {
+    return this.subject.asObservable();
   }
 
 }

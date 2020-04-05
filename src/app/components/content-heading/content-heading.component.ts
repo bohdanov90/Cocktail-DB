@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {ShareService} from "../../services/share.service";
 import {HttpRequestsService} from "../../services/http-requests.service";
-import { FilterItemComponent } from "../filter-item/filter-item.component";
 import {map} from "rxjs/operators";
 
 @Component({
@@ -10,76 +9,118 @@ import {map} from "rxjs/operators";
   styleUrls: ['./content-heading.component.scss']
 })
 
-export class ContentHeadingComponent implements OnInit {
+export class ContentHeadingComponent implements OnInit, DoCheck {
 
-  public arr2 = [];
-  public contentItems: any = [];
-  public category = [];
-
-  public arrayOfContentItems = [];
-  public strDrink = [];
+  public filterItems;
+  public contentItemsArray = [];
+  public dataArray = [];
 
   constructor(
     public share: ShareService,
     public httpRequestService: HttpRequestsService,
-    public filterItemComponent: FilterItemComponent,
   ) {}
 
   ngOnInit() {
-    this.checkAllItemsToTrue().subscribe();
-    this.displayingContent().subscribe();
+    this.share.getAnArray().subscribe(el => {
+      this.filterItems = el;
+      console.log('filterItems', this.filterItems);
+    });
+
+    this.fetchEveryFilter();
+
+    console.log('NgOnInit Filter Items', this.filterItems);
+    console.log('NgOnInit DataArray', this.dataArray);
   }
 
-  displayingContent() {
-    return this.httpRequestService.getContentItems('Shot')
-      .pipe(map(data => {
-        this.arrayOfContentItems = data['drinks'];
-        this.arrayOfContentItems.forEach(el => this.strDrink.push(el['strDrink']));
-        console.log(this.strDrink);
-        return this.strDrink;
-      }))
+  ngDoCheck() {
+    console.log('Filter Items', this.filterItems);
+    console.log('DataArray', this.dataArray);
   }
 
-  checkAllItemsToTrue() {
-    return this.share.shareOnClick
-      .pipe(map(item => {
-        this.arr2 = item.filter( el => {
-          return el.checked === true;
-        });
-        console.log(this.arr2);
-      }))
-  }
 
-  fetchFromImport() {
-    return this.filterItemComponent.fetchFilters();
-  }
 
-  fetchNew(category) {
-    return this.httpRequestService.getFilterItems()
-      .subscribe(items => {
-        // console.log(this.isChecked1);
-        this.arr2 = items['drinks'];
-        this.arr2.forEach(el => el.checked = true);
-        console.log(this.arr2);
-        // return this.arr;
-        this.category = this.arr2.map(el => el.strCategory);
-        console.log(this.category);
-        // console.log(this.category);
-        this.fetchContent(category);
-      });
-  }
-
-  fetchContent(category) {
+  fetchContent(category: string) {
     return this.httpRequestService.getContentItems(category)
-      .subscribe(items => {
-        console.log(items);
-        this.contentItems = items['drinks'];
-        console.log(this.contentItems);
-      })
+      .pipe(map(data => this.contentItemsArray = data['drinks']));
   }
 
-  clickMe() {
-    this.share.shareDoCLick();
+  fetchEveryFilter() {
+
+    // if (this.filterItems) {
+    //   this.filterItems.forEach(el => {
+    //     if (el.checked === true) {
+    //       this.fetchContent(el.strCategory).subscribe();
+    //     }
+    //   });
+    //   return;
+    // }
+
+    this.fetchContent('Ordinary Drink').subscribe(el => {
+      this.dataArray.push({
+        title: 'Ordinary Drink',
+        data: el,
+      })
+    });
+    this.fetchContent('Cocktail').subscribe(el => {
+      this.dataArray.push({
+        title: 'Cocktail',
+        data: el,
+      })
+    });
+    this.fetchContent('Milk / Float / Shake').subscribe(el => {
+      this.dataArray.push({
+        title: 'Milk / Float / Shake',
+        data: el,
+      })
+    });
+    this.fetchContent('Other/Unknown').subscribe(el => {
+      this.dataArray.push({
+        title: 'Other/Unknown',
+        data: el,
+      })
+    });
+    this.fetchContent('Cocoa').subscribe(el => {
+      this.dataArray.push({
+        title: 'Cocoa',
+        data: el,
+      })
+    });
+    this.fetchContent('Shot').subscribe(el => {
+      this.dataArray.push({
+        title: 'Shot',
+        data: el,
+      })
+    });
+    this.fetchContent('Coffee / Tea').subscribe(el => {
+      this.dataArray.push({
+        title: 'Coffee / Tea',
+        data: el,
+      })
+    });
+    this.fetchContent('Homemade Liqueur').subscribe(el => {
+      this.dataArray.push({
+        title: 'Homemade Liqueur',
+        data: el,
+      })
+    });
+    this.fetchContent('Punch / Party Drink').subscribe(el => {
+      this.dataArray.push({
+        title: 'Punch / Party Drink',
+        data: el,
+      })
+    });
+    this.fetchContent('Beer').subscribe(el => {
+      this.dataArray.push({
+        title: 'Beer',
+        data: el,
+      })
+    });
+    this.fetchContent('Soft Drink / Soda').subscribe(el => {
+      this.dataArray.push({
+        title: 'Soft Drink / Soda',
+        data: el,
+      })
+    });
   }
 
 }

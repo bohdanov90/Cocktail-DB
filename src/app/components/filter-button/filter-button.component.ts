@@ -11,10 +11,9 @@ import { HttpRequestsService } from "../../services/http-requests.service";
 
 export class FilterButtonComponent implements OnInit {
 
-  public arr1 = [];
-  public contentItems: any = [];
+  public filterItems;
 
-  @Output() onAdd:EventEmitter<any> = new EventEmitter<any>();
+  @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private share: ShareService,
@@ -22,11 +21,15 @@ export class FilterButtonComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.share.shareOnClick.subscribe(item => this.arr1 = item);
+    this.share.getAnArray().subscribe(el => {
+      this.filterItems = el;
+      console.log(this.filterItems);
+    }); // ??? всем обновили массив filter items
   }
 
-  clickMe() {
-    this.share.shareDoCLick();
+  onButtonClick() {
+    this.share.passAnArray(this.filterItems); // всем раздали массив filter items??? во второй раз?
+    this.buttonClick.emit(this.filterItems);
   }
 
 }
