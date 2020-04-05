@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -8,18 +7,15 @@ import { Observable, Subject } from 'rxjs';
 
 export class SubjectService {
 
-  public subject = new Subject();
-  public subj: Observable<any> = new Subject();
+  public subject: Subject<any> = new Subject();
 
-  constructor(
-    private httpService: HttpService,
-  ) {}
+  constructor() {}
 
-  passAnArray(arr) {
+  passAnArray(arr: Array<any>): void {
     this.subject.next(arr);
   }
 
-  getAnArray() {
+  getAnArray(): Observable<any> {
     return this.subject.asObservable();
   }
 

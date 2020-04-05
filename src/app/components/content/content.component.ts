@@ -1,37 +1,41 @@
+import { FilterItem } from './../../interfaces/filter-item';
 import { Component, OnInit } from '@angular/core';
 import { SubjectService } from '../../services/subject.service';
 import { HttpService } from '../../services/http.service';
 import { map } from 'rxjs/operators';
+import { ContentItem } from '../../interfaces/content-item';
+import { Data } from '../../interfaces/data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+  styleUrls: ['./content.component.scss'],
 })
 
 export class ContentComponent implements OnInit {
 
-  public filterItems;
-  public contentItemsArray = [];
-  public dataArray = [];
+  public filterItems: FilterItem[];
+  public contentItemsArray: ContentItem[] = [];
+  public dataArray: Data[] = [];
   query = 'drinks';
 
   constructor(
-    public shareService: SubjectService,
+    public subjectService: SubjectService,
     public httpService: HttpService,
   ) {}
 
   ngOnInit() {
-    this.shareService.getAnArray().subscribe(el => this.filterItems = el);
+    this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
     this.fetchEveryFilter();
   }
 
-  fetchContent(category: string) {
+  fetchContent(category: string): Observable<any> {
     return this.httpService.getContentItems(category)
       .pipe(map(data => this.contentItemsArray = data[this.query]));
   }
 
-  fetchEveryFilter() { // optimize
+  fetchEveryFilter(): void { // optimize
 
     this.fetchContent('Ordinary Drink').subscribe(el => {
       this.dataArray.push({

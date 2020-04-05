@@ -1,3 +1,4 @@
+import { FilterItem } from './../../interfaces/filter-item';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
@@ -10,26 +11,26 @@ import { SubjectService } from '../../services/subject.service';
 
 export class FilterComponent implements OnInit {
 
-  public filterItems;
+  public filterItems: FilterItem[];
 
   @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private httpService: HttpService,
-    private shareService: SubjectService
+    private subjectService: SubjectService
   ) {}
 
   ngOnInit() {
     this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
-    this.shareService.getAnArray().subscribe(el => this.filterItems = el);
+    // this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
   }
 
-  markFilterItem(element: number) {
+  markFilterItem(element: number): void {
     this.filterItems[element].checked = !this.filterItems[element].checked;
   }
 
-  onButtonClick() {
-    this.shareService.passAnArray(this.filterItems);
+  onButtonClick(): void {
+    this.subjectService.passAnArray(this.filterItems);
     this.buttonClick.emit(this.filterItems);
   }
 
