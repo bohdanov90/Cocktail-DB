@@ -45,7 +45,7 @@ export class HttpRequestsService {
       .pipe(map(() => {
         this.filterItems.forEach(el => el.checked = true);
         return this.filterItems;
-      }))
+      }));
   }
 
 }

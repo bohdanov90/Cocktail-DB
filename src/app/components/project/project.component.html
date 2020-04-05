@@ -2,10 +2,10 @@
   <app-header class="header"></app-header>
   <div class="main">
     <div class="filter">
-      <app-filter-item></app-filter-item>
-      <app-filter-button
-        (buttonClick)="tempFunc($event)"
-      ></app-filter-button>
+      <app-filter-item 
+      (buttonClick)="tempFunc($event)"
+      class="filter-bar"
+      ></app-filter-item>
     </div>
     <div class="content">
       <app-content-heading

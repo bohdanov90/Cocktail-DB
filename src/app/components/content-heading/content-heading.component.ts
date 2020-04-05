@@ -33,8 +33,8 @@ export class ContentHeadingComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    console.log('Filter Items', this.filterItems);
-    console.log('DataArray', this.dataArray);
+    // console.log('Filter Items', this.filterItems);
+    // console.log('DataArray', this.dataArray);
   }
 
 

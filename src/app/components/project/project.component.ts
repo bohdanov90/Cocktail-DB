@@ -18,11 +18,11 @@ export class ProjectComponent implements OnInit, DoCheck {
   constructor(
     private httpRequestsService: HttpRequestsService,
     private shareService: ShareService,
-  ) {
-    this.shareService.getAnArray().subscribe(arr => console.log(arr));
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.shareService.getAnArray().subscribe(arr => console.log(arr));
+
     this.httpRequestsService.markAllFilters().subscribe(el => {
       this.filterItems = el;
       console.log(this.filterItems);
@@ -32,7 +32,7 @@ export class ProjectComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    console.log(this.contentItemsArray);
+    // console.log(this.contentItemsArray);
   }
 
   // fetchContent(category: string) {

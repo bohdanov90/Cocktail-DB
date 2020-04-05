@@ -22,8 +22,12 @@
       justify-content: flex-start;
       align-items: center;
       width: 25%;
-      border: solid 1px red;
     }
+
+      .filter-bar {
+        position: fixed;
+        margin-top: 30px;
+      }
 
     .content {
       width: 75%;
