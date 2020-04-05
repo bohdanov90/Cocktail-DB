@@ -40,9 +40,10 @@ export class FilterItemComponent implements OnInit, DoCheck {
   markFilterItem(element) {
     this.filterItems[element].checked = !this.filterItems[element].checked;
     console.log(this.filterItems);
-    this.shareService.passAnArray(this.filterItems); // если эмитить эту строку начинаются проблемы
+    // this.shareService.passAnArray(this.filterItems); // если эмитить эту строку начинаются проблемы
     console.log('after', this.filterItems);
     // this.sharing.emit(this.filterItems);
+    // return this.filterItems;
   }
 
 }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FilterItemComponent} from "../filter-item/filter-item.component";
-import { ShareService } from "../../services/share.service";
-import { HttpRequestsService } from "../../services/http-requests.service";
+import {FilterItemComponent} from '../filter-item/filter-item.component';
+import { ShareService } from '../../services/share.service';
+import { HttpRequestsService } from '../../services/http-requests.service';
 
 @Component({
   selector: 'app-filter-button',

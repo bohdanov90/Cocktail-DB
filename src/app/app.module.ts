@@ -8,7 +8,6 @@ import { ProjectComponent } from './components/project/project.component';
 import { FilterItemComponent } from './components/filter-item/filter-item.component';
 import { FilterButtonComponent } from './components/filter-button/filter-button.component';
 import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
-import { ContentItemComponent } from './components/content-item/content-item.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 
@@ -20,7 +19,6 @@ import {FormsModule} from "@angular/forms";
     FilterItemComponent,
     FilterButtonComponent,
     ContentHeadingComponent,
-    ContentItemComponent
   ],
   imports: [
     BrowserModule,

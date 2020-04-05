@@ -28,17 +28,17 @@ export class ProjectComponent implements OnInit, DoCheck {
       console.log(this.filterItems);
     }); // ??? всем обновили массив filter items
 
-    this.fetchContent('Beer').subscribe();
+    // this.fetchContent('Beer').subscribe();
   }
 
   ngDoCheck() {
     console.log(this.contentItemsArray);
   }
 
-  fetchContent(category: string) {
-    return this.httpRequestsService.getContentItems(category)
-      .pipe(map(data => this.contentItemsArray = data['drinks']));
-  }
+  // fetchContent(category: string) {
+  //   return this.httpRequestsService.getContentItems(category)
+  //     .pipe(map(data => this.contentItemsArray = data['drinks']));
+  // }
 
   tempFunc(event) { // здесь тоже вопрос
     this.visible = true;

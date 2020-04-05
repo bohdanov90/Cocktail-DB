@@ -3,10 +3,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 1440px;
+  box-sizing: border-box;
 }
+
+  .header {
+    width: 100%;
+  }
 
   .main {
     display: flex;
+    width: 100%;
   }
 
     .filter {
@@ -14,8 +21,15 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      width: 327px;
+      width: 25%;
       border: solid 1px red;
+    }
+
+    .content {
+      width: 75%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
 .hidden {
