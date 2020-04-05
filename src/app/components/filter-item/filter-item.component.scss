@@ -4,40 +4,38 @@
   width: 100%;
 }
 
-.filter-item {
-  width: 100%;
-  display: flex;
-  padding-bottom: 21px;
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 19px;
-  color: #818181;
-}
-
-  .input {
-    margin-right: 5px;
-  }
-
-.filter-button {
-  width: 100%;
-}
-
-  button {
-    text-transform: uppercase;
-    width: 180px;
-    height: 39px;
-    background: #4E4E4E;
-    border-radius: 10px;
+  .filter-item {
+    display: flex;
+    width: 100%;
+    padding-bottom: 21px;
     font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: bold;
     font-size: 16px;
     line-height: 19px;
-    color: #FFFFFF;
+    color: #818181;
   }
 
-  .btn {
-    cursor: pointer;
+    .input {
+      margin-right: 5px;
+    }
+
+  .filter-button {
+    width: 100%;
   }
+
+    button {
+      width: 180px;
+      height: 39px;
+      border-radius: 10px;
+      font-family: 'Roboto', sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 19px;
+      color: #FFFFFF;
+      background: #4E4E4E;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      cursor: pointer;
+    }

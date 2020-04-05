@@ -8,32 +8,40 @@
 
     <div *ngFor="let a of dataArray">
       <div *ngIf="item.strCategory === a.title">
+
         <div class="container" *ngFor="let item of a.data; let i = index">
 
           <div class="row" *ngIf="i % 5 == 0">
+
             <div class="item">
               <div class="img-wrapper"><img src="{{item.strDrinkThumb}}" alt=""></div>
               <div class="item-title">{{item.strDrink}}</div>
             </div>
+
             <div class="item" *ngIf="i + 1 < a.data.length">
               <div class="img-wrapper"><img src="{{a.data[i + 1].strDrinkThumb}}" alt=""></div>
               <div class="item-title">{{a.data[i + 1].strDrink}}</div>
             </div>
+
             <div class="item" *ngIf="i + 2 < a.data.length">
               <div class="img-wrapper"><img src="{{a.data[i + 2].strDrinkThumb}}" alt=""></div>
               <div class="item-title">{{a.data[i + 2].strDrink}}</div>
             </div>
+
             <div class="item" *ngIf="i + 3 < a.data.length">
               <div class="img-wrapper"><img src="{{a.data[i + 3].strDrinkThumb}}" alt=""></div>
               <div class="item-title">{{a.data[i + 3].strDrink}}</div>
             </div>
+
             <div class="item" *ngIf="i + 4 < a.data.length">
               <div class="img-wrapper"><img src="{{a.data[i + 4].strDrinkThumb}}" alt=""></div>
               <div class="item-title">{{a.data[i + 4].strDrink}}</div>
             </div>
+
           </div>
 
         </div>
+
       </div>
     </div>
 

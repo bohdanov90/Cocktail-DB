@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {FilterItem} from "../interfaces/filter-item";
-import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +10,10 @@ export class HttpRequestsService {
 
   filterItems = [];
   contentItems = [];
+  query = 'drinks';
 
   constructor(private http: HttpClient) {
-    this.fetchFilters().subscribe(el => console.log(el));
+    this.fetchFilters().subscribe();
   }
 
   getFilterItems() {
@@ -27,15 +27,15 @@ export class HttpRequestsService {
   fetchFilters() {
     return this.getFilterItems()
       .pipe(map(items => {
-        this.filterItems = items['drinks'];
+        this.filterItems = items[this.query];
         return this.filterItems;
       }));
   }
 
-  fetchContent(category) {
+  fetchContent(category) { // не используется
     return this.getContentItems(category)
       .pipe(map(items => {
-        this.contentItems = items['drinks'];
+        this.contentItems = items[this.query];
         return this.contentItems;
       }));
   }

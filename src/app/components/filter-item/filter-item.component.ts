@@ -1,10 +1,6 @@
-import {Component, EventEmitter, OnInit, DoCheck, Output} from '@angular/core';
-import {FilterItem} from "../../interfaces/filter-item";
-import { HttpRequestsService } from "../../services/http-requests.service";
-import {ShareService} from "../../services/share.service";
-import {map} from "rxjs/operators";
-import { MarkFilterItemService } from "../../services/mark-filter-item.service";
-import {Subject} from "rxjs";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { HttpRequestsService } from '../../services/http-requests.service';
+import { ShareService } from '../../services/share.service';
 
 @Component({
   selector: 'app-filter-item',
@@ -12,11 +8,10 @@ import {Subject} from "rxjs";
   styleUrls: ['./filter-item.component.scss']
 })
 
-export class FilterItemComponent implements OnInit, DoCheck {
+export class FilterItemComponent implements OnInit {
 
   public filterItems;
 
-  // @Output() sharing: EventEmitter<any> = new EventEmitter<any>();
   @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
@@ -25,34 +20,16 @@ export class FilterItemComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit() {
-    this.httpRequestService.markAllFilters().subscribe(el => {
-      this.filterItems = el;
-      console.log(this.filterItems);
-    }); // ??? всем обновили массив filter items
-
-    // это из баттон компонента
-    this.shareService.getAnArray().subscribe(el => {
-      this.filterItems = el;
-      console.log(this.filterItems);
-    }); // ??? всем обновили массив filter items
+    this.httpRequestService.markAllFilters().subscribe(el => this.filterItems = el);
+    this.shareService.getAnArray().subscribe(el => this.filterItems = el);
   }
 
-  ngDoCheck() {
-    // this.shareService.passAnArray(this.filterItems);
-    // console.log(this.filterItems);
-  }
-
-  markFilterItem(element) {
+  markFilterItem(element: number) {
     this.filterItems[element].checked = !this.filterItems[element].checked;
-    // console.log(this.filterItems);
-    // this.shareService.passAnArray(this.filterItems); // если эмитить эту строку начинаются проблемы
-    // console.log('after', this.filterItems);
-    // this.sharing.emit(this.filterItems);
-    // return this.filterItems;
   }
 
   onButtonClick() {
-    this.shareService.passAnArray(this.filterItems); // всем раздали массив filter items??? во второй раз?
+    this.shareService.passAnArray(this.filterItems);
     this.buttonClick.emit(this.filterItems);
   }
 

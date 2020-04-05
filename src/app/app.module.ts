@@ -7,8 +7,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { ProjectComponent } from './components/project/project.component';
 import { FilterItemComponent } from './components/filter-item/filter-item.component';
 import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [

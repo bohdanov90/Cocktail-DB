@@ -5,75 +5,74 @@
   width: 100%;
 }
 
-.heading {
-  width: 100%;
-  padding: 15px 0;
-  font-family: 'Roboto', sans-serif;
-  font-size: 24px;
-  line-height: 28px;
-  color: #818181;
-  margin-top: 20px;
-}
+  .heading {
+    width: 100%;
+    padding: 15px 0;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    line-height: 28px;
+    color: #818181;
+  }
 
   .hr {
-    border: 1px solid #D0D0D0; 
     margin-bottom: 20px;
+    border: 1px solid #D0D0D0; 
   }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.row {
-  display: flex;
-  width: 100%;
-  height: auto;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 150px;
-  height: 180px;
-  margin: 10px 50px 10px 0;
-  box-sizing: border-box;
-  // padding: 0 10px;
-}
-
-.item:last-child {
-  margin: 10px 0;
-}
-
-.img-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 150px;
-}
-
-  img {
-    height: 100%;
+  .container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding-bottom: 5px;
   }
 
-.item-title {
-  width: 100%;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: normal;  
-  font-size: 14px;
-  line-height: 21px;
-  color: #000000;
-}
+    .row {
+      display: flex;
+      width: 100%;
+      height: auto;
+    }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 150px;
+        height: 180px;
+        margin: 10px 50px 10px 0;
+        box-sizing: border-box;
+      }
+
+      .item:last-child {
+        margin: 10px 0;
+      }
+
+        .img-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: 150px;
+        }
+
+          img {
+            height: 100%;
+            width: 100%;
+            padding-bottom: 5px;
+          }
+
+        .item-title {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          height: 30px;
+          white-space: nowrap;
+          font-family: 'Roboto', sans-serif;
+          font-style: normal;
+          font-weight: normal;  
+          font-size: 14px;
+          line-height: 21px;
+          color: #000000;
+        }

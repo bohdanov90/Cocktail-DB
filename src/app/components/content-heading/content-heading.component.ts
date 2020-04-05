@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ShareService} from '../../services/share.service';
 import {HttpRequestsService} from '../../services/http-requests.service';
 import {map} from 'rxjs/operators';
@@ -9,42 +9,29 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./content-heading.component.scss']
 })
 
-export class ContentHeadingComponent implements OnInit, DoCheck {
+export class ContentHeadingComponent implements OnInit {
 
   public filterItems;
   public contentItemsArray = [];
   public dataArray = [];
+  query = 'drinks';
 
   constructor(
-    public share: ShareService,
-    public httpRequestService: HttpRequestsService,
+    public shareService: ShareService,
+    public httpRequestsService: HttpRequestsService,
   ) {}
 
   ngOnInit() {
-    this.share.getAnArray().subscribe(el => {
-      this.filterItems = el;
-      console.log('filterItems', this.filterItems);
-    });
-
+    this.shareService.getAnArray().subscribe(el => this.filterItems = el);
     this.fetchEveryFilter();
-
-    console.log('NgOnInit Filter Items', this.filterItems);
-    console.log('NgOnInit DataArray', this.dataArray);
   }
-
-  ngDoCheck() {
-    // console.log('Filter Items', this.filterItems);
-    // console.log('DataArray', this.dataArray);
-  }
-
-
 
   fetchContent(category: string) {
-    return this.httpRequestService.getContentItems(category)
-      .pipe(map(data => this.contentItemsArray = data['drinks']));
+    return this.httpRequestsService.getContentItems(category)
+      .pipe(map(data => this.contentItemsArray = data[this.query]));
   }
 
-  fetchEveryFilter() {
+  fetchEveryFilter() { // оптимизировать
 
     // if (this.filterItems) {
     //   this.filterItems.forEach(el => {
@@ -121,6 +108,7 @@ export class ContentHeadingComponent implements OnInit, DoCheck {
         data: el,
       });
     });
+
   }
 
 }

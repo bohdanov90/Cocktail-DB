@@ -1,7 +1,6 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import { HttpRequestsService } from "./http-requests.service";
-import {map} from "rxjs/operators";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpRequestsService } from './http-requests.service';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
