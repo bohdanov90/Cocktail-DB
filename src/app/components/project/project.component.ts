@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpRequestsService } from '../../services/http-requests.service';
-import { ShareService } from '../../services/share.service';
+import { HttpService } from '../../services/http.service';
+import { SubjectService } from '../../services/subject.service';
 
 @Component({
   selector: 'app-project',
@@ -16,13 +16,13 @@ export class ProjectComponent implements OnInit {
   public contentItemsArray = [];
 
   constructor(
-    private httpRequestsService: HttpRequestsService,
-    private shareService: ShareService,
+    private httpService: HttpService,
+    private shareService: SubjectService,
   ) {}
 
   ngOnInit(): void {
     this.shareService.getAnArray().subscribe();
-    this.httpRequestsService.markAllFilters().subscribe(el => this.filterItems = el);
+    this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
   }
 
   onButtonClick() {

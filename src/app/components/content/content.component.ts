@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ShareService} from '../../services/share.service';
-import {HttpRequestsService} from '../../services/http-requests.service';
-import {map} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { SubjectService } from '../../services/subject.service';
+import { HttpService } from '../../services/http.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-content',
@@ -17,8 +17,8 @@ export class ContentComponent implements OnInit {
   query = 'drinks';
 
   constructor(
-    public shareService: ShareService,
-    public httpRequestsService: HttpRequestsService,
+    public shareService: SubjectService,
+    public httpService: HttpService,
   ) {}
 
   ngOnInit() {
@@ -27,20 +27,11 @@ export class ContentComponent implements OnInit {
   }
 
   fetchContent(category: string) {
-    return this.httpRequestsService.getContentItems(category)
+    return this.httpService.getContentItems(category)
       .pipe(map(data => this.contentItemsArray = data[this.query]));
   }
 
-  fetchEveryFilter() { // оптимизировать
-
-    // if (this.filterItems) {
-    //   this.filterItems.forEach(el => {
-    //     if (el.checked === true) {
-    //       this.fetchContent(el.strCategory).subscribe();
-    //     }
-    //   });
-    //   return;
-    // }
+  fetchEveryFilter() { // optimize
 
     this.fetchContent('Ordinary Drink').subscribe(el => {
       this.dataArray.push({

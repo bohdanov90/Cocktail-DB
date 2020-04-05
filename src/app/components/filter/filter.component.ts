@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { HttpRequestsService } from '../../services/http-requests.service';
-import { ShareService } from '../../services/share.service';
+import { HttpService } from '../../services/http.service';
+import { SubjectService } from '../../services/subject.service';
 
 @Component({
   selector: 'app-filter',
@@ -15,12 +15,12 @@ export class FilterComponent implements OnInit {
   @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private httpRequestService: HttpRequestsService,
-    private shareService: ShareService
+    private httpService: HttpService,
+    private shareService: SubjectService
   ) {}
 
   ngOnInit() {
-    this.httpRequestService.markAllFilters().subscribe(el => this.filterItems = el);
+    this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
     this.shareService.getAnArray().subscribe(el => this.filterItems = el);
   }
 

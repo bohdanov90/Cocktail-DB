@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpRequestsService } from './http-requests.service';
+import { HttpService } from './http.service';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ShareService {
+export class SubjectService {
 
   public subject = new Subject();
   public subj: Observable<any> = new Subject();
 
   constructor(
-    private httpRequestService: HttpRequestsService,
+    private httpService: HttpService,
   ) {}
 
   passAnArray(arr) {
