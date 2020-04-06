@@ -35,7 +35,7 @@ export class HttpService {
       }));
   }
 
-  fetchContent(category): Observable<Array<ContentItem>> { // не используется
+  fetchContent(category: string): Observable<Array<ContentItem>> {
     return this.getContentItems(category)
       .pipe(map(items => {
         this.contentItems = items[this.query];

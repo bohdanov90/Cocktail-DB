@@ -35,8 +35,7 @@ export class ContentComponent implements OnInit {
       .pipe(map(data => this.contentItemsArray = data[this.query]));
   }
 
-  fetchEveryFilter(): void { // optimize
-
+  fetchEveryFilter(): void {
     this.fetchContent('Ordinary Drink').subscribe(el => {
       this.dataArray.push({
         title: 'Ordinary Drink',
@@ -103,7 +102,6 @@ export class ContentComponent implements OnInit {
         data: el,
       });
     });
-
   }
 
 }

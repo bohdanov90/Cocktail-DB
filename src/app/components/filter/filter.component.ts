@@ -22,7 +22,6 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
-    // this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
   }
 
   markFilterItem(element: number): void {

@@ -21,7 +21,6 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.subjectService.getAnArray().subscribe();
     this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
   }
 
