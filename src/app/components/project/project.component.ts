@@ -21,10 +21,12 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
+    // this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
+    // this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
   }
 
   onButtonClick(): void {
+    // this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
     this.visible = true;
     this.hidden = false;
   }

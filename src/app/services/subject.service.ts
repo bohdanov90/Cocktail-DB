@@ -7,16 +7,16 @@ import { Observable, Subject } from 'rxjs';
 
 export class SubjectService {
 
-  public subject: Subject<any> = new Subject();
+  public subject$: Subject<any> = new Subject();
 
   constructor() {}
 
   passAnArray(arr: Array<any>): void {
-    this.subject.next(arr);
+    this.subject$.next(arr);
   }
 
   getAnArray(): Observable<any> {
-    return this.subject.asObservable();
+    return this.subject$.asObservable();
   }
 
 }

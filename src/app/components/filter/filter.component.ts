@@ -24,7 +24,7 @@ export class FilterComponent implements OnInit {
     this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
   }
 
-  markFilterItem(element: number): void {
+  markFilterItem(element: number) {
     this.filterItems[element].checked = !this.filterItems[element].checked;
   }
 

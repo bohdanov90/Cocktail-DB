@@ -2,7 +2,7 @@
 
   <div class="filter-item" *ngFor="let filterItem of filterItems; let i = index">
     <div class="input">
-      <label><input type="checkbox" [(ngModel)]="filterItem.checked" (click)="markFilterItem(i)"></label>
+      <label><input type="checkbox" checked (click)="markFilterItem(i)"></label>
     </div>
     <div class="text">{{filterItem.strCategory}}</div>
   </div>
