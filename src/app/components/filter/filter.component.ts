@@ -2,6 +2,8 @@ import { FilterItem } from './../../interfaces/filter-item';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filter',
@@ -12,6 +14,7 @@ import { SubjectService } from '../../services/subject.service';
 export class FilterComponent implements OnInit {
 
   public filterItems: FilterItem[];
+  public fetchedFilters: FilterItem[];
 
   @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
 
@@ -21,7 +24,16 @@ export class FilterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.httpService.markAllFilters$().subscribe(el => this.filterItems = el);
+    this.httpService.fetchFilters$().subscribe(el => this.fetchedFilters = el);
+    this.markAllFilters$().subscribe(el => this.filterItems = el);
+  }
+
+  markAllFilters$(): Observable<Array<FilterItem>> {
+    return this.httpService.fetchFilters$()
+      .pipe(map(() => {
+        this.fetchedFilters.forEach(el => el.checked = true);
+        return this.fetchedFilters;
+      }));
   }
 
   markFilterItem(element: number) {

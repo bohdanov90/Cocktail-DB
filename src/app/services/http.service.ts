@@ -15,16 +15,10 @@ export class HttpService {
   contentItems: ContentItem[] = []; // не используется
   query = 'drinks';
 
-  constructor(private http: HttpClient) {
-    this.fetchFilters$().subscribe();
-  }
+  constructor(private http: HttpClient) {}
 
   getFilterItems$(): Observable<any> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
-  }
-
-  getContentItems$(drinkCategory: string): Observable<any> {
-    return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`);
   }
 
   fetchFilters$(): Observable<Array<FilterItem>> {
@@ -35,19 +29,15 @@ export class HttpService {
       }));
   }
 
+  getContentItems$(drinkCategory: string): Observable<any> {
+    return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`);
+  }
+
   fetchContent$(category: string): Observable<Array<ContentItem>> {
     return this.getContentItems$(category)
       .pipe(map(items => {
         this.contentItems = items[this.query];
         return this.contentItems;
-      }));
-  }
-
-  markAllFilters$(): Observable<Array<FilterItem>> {
-    return this.fetchFilters$()
-      .pipe(map(() => {
-        this.filterItems.forEach(el => el.checked = true);
-        return this.filterItems;
       }));
   }
 
