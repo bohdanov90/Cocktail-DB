@@ -16,35 +16,35 @@ export class HttpService {
   query = 'drinks';
 
   constructor(private http: HttpClient) {
-    this.fetchFilters().subscribe();
+    this.fetchFilters$().subscribe();
   }
 
-  getFilterItems(): Observable<any> {
+  getFilterItems$(): Observable<any> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   }
 
-  getContentItems(drinkCategory: string): Observable<any> {
+  getContentItems$(drinkCategory: string): Observable<any> {
     return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`);
   }
 
-  fetchFilters(): Observable<Array<FilterItem>> {
-    return this.getFilterItems()
+  fetchFilters$(): Observable<Array<FilterItem>> {
+    return this.getFilterItems$()
       .pipe(map(items => {
         this.filterItems = items[this.query];
         return this.filterItems;
       }));
   }
 
-  fetchContent(category: string): Observable<Array<ContentItem>> {
-    return this.getContentItems(category)
+  fetchContent$(category: string): Observable<Array<ContentItem>> {
+    return this.getContentItems$(category)
       .pipe(map(items => {
         this.contentItems = items[this.query];
         return this.contentItems;
       }));
   }
 
-  markAllFilters(): Observable<Array<FilterItem>> {
-    return this.fetchFilters()
+  markAllFilters$(): Observable<Array<FilterItem>> {
+    return this.fetchFilters$()
       .pipe(map(() => {
         this.filterItems.forEach(el => el.checked = true);
         return this.filterItems;

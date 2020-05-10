@@ -26,77 +26,77 @@ export class ContentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
+    this.subjectService.getAnArray$().subscribe(el => this.filterItems = el);
     this.fetchEveryFilter();
   }
 
-  fetchContent(category: string): Observable<any> {
-    return this.httpService.getContentItems(category)
+  fetchContent$(category: string): Observable<any> {
+    return this.httpService.getContentItems$(category)
       .pipe(map(data => this.contentItemsArray = data[this.query]));
   }
 
   fetchEveryFilter(): void {
-    this.fetchContent('Ordinary Drink').subscribe(el => {
+    this.fetchContent$('Ordinary Drink').subscribe(el => {
       this.dataArray.push({
         title: 'Ordinary Drink',
         data: el,
       });
     });
-    this.fetchContent('Cocktail').subscribe(el => {
+    this.fetchContent$('Cocktail').subscribe(el => {
       this.dataArray.push({
         title: 'Cocktail',
         data: el,
       });
     });
-    this.fetchContent('Milk / Float / Shake').subscribe(el => {
+    this.fetchContent$('Milk / Float / Shake').subscribe(el => {
       this.dataArray.push({
         title: 'Milk / Float / Shake',
         data: el,
       });
     });
-    this.fetchContent('Other/Unknown').subscribe(el => {
+    this.fetchContent$('Other/Unknown').subscribe(el => {
       this.dataArray.push({
         title: 'Other/Unknown',
         data: el,
       });
     });
-    this.fetchContent('Cocoa').subscribe(el => {
+    this.fetchContent$('Cocoa').subscribe(el => {
       this.dataArray.push({
         title: 'Cocoa',
         data: el,
       });
     });
-    this.fetchContent('Shot').subscribe(el => {
+    this.fetchContent$('Shot').subscribe(el => {
       this.dataArray.push({
         title: 'Shot',
         data: el,
       });
     });
-    this.fetchContent('Coffee / Tea').subscribe(el => {
+    this.fetchContent$('Coffee / Tea').subscribe(el => {
       this.dataArray.push({
         title: 'Coffee / Tea',
         data: el,
       });
     });
-    this.fetchContent('Homemade Liqueur').subscribe(el => {
+    this.fetchContent$('Homemade Liqueur').subscribe(el => {
       this.dataArray.push({
         title: 'Homemade Liqueur',
         data: el,
       });
     });
-    this.fetchContent('Punch / Party Drink').subscribe(el => {
+    this.fetchContent$('Punch / Party Drink').subscribe(el => {
       this.dataArray.push({
         title: 'Punch / Party Drink',
         data: el,
       });
     });
-    this.fetchContent('Beer').subscribe(el => {
+    this.fetchContent$('Beer').subscribe(el => {
       this.dataArray.push({
         title: 'Beer',
         data: el,
       });
     });
-    this.fetchContent('Soft Drink / Soda').subscribe(el => {
+    this.fetchContent$('Soft Drink / Soda').subscribe(el => {
       this.dataArray.push({
         title: 'Soft Drink / Soda',
         data: el,

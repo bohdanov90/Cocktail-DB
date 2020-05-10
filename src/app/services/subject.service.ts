@@ -15,7 +15,7 @@ export class SubjectService {
     this.subject$.next(arr);
   }
 
-  getAnArray(): Observable<any> {
+  getAnArray$(): Observable<any> {
     return this.subject$.asObservable();
   }
 
