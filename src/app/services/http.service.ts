@@ -11,22 +11,16 @@ import { ContentItem } from '../interfaces/content-item';
 
 export class HttpService {
 
-  filterItems: FilterItem[] = [];
   contentItems: ContentItem[] = []; // не используется
-  query = 'drinks';
+  queryFilters = 'drinks';
 
   constructor(private http: HttpClient) {}
 
-  getFilterItems$(): Observable<any> {
-    return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
-  }
-
-  fetchFilters$(): Observable<Array<FilterItem>> {
-    return this.getFilterItems$()
-      .pipe(map(items => {
-        this.filterItems = items[this.query];
-        return this.filterItems;
-      }));
+  getFilterItems$(): Observable<Array<FilterItem>> {
+    return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
+      .pipe(
+        map(items => items[this.queryFilters]),
+      );
   }
 
   getContentItems$(drinkCategory: string): Observable<any> {
@@ -36,7 +30,7 @@ export class HttpService {
   fetchContent$(category: string): Observable<Array<ContentItem>> {
     return this.getContentItems$(category)
       .pipe(map(items => {
-        this.contentItems = items[this.query];
+        this.contentItems = items[this.queryFilters];
         return this.contentItems;
       }));
   }
