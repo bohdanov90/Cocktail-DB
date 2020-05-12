@@ -41,8 +41,8 @@ export class FilterComponent implements OnInit {
 
   submitForm() {
     console.log(this.filtersForm.value);
-    // this.subjectService.passAnArray(this.filterItems);
-    // this.buttonClick.emit(this.filterItems);
+    this.subjectService.passAnArray(this.filtersForm.value);
+    this.buttonClick.emit(this.filtersForm.value);
   }
 
 }

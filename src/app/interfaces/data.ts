@@ -1,4 +1,5 @@
+import { ContentItem } from './content-item';
 export interface Data {
   title: string;
-  data: Array<any>;
+  data: ContentItem[];
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +7,11 @@ import { Observable, Subject } from 'rxjs';
 
 export class SubjectService {
 
-  public subject$: Subject<any> = new Subject();
+  public subject$: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor() {}
 
-  passAnArray(arr: Array<any>): void {
+  passAnArray(arr): void {
     this.subject$.next(arr);
   }
 

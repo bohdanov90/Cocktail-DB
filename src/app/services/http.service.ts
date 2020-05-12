@@ -11,7 +11,7 @@ import { ContentItem } from '../interfaces/content-item';
 
 export class HttpService {
 
-  contentItems: ContentItem[] = []; // не используется
+  // contentItems: ContentItem[] = []; // не используется
   queryFilters = 'drinks';
 
   constructor(private http: HttpClient) {}
@@ -23,16 +23,11 @@ export class HttpService {
       );
   }
 
-  getContentItems$(drinkCategory: string): Observable<any> {
-    return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`);
-  }
-
-  fetchContent$(category: string): Observable<Array<ContentItem>> {
-    return this.getContentItems$(category)
-      .pipe(map(items => {
-        this.contentItems = items[this.queryFilters];
-        return this.contentItems;
-      }));
+  getContentItems$(drinkCategory: string): Observable<Array<ContentItem>> {
+    return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`)
+      .pipe(
+        map(items => items[this.queryFilters]),
+      );
   }
 
 }

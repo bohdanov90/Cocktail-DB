@@ -2,7 +2,7 @@
 
   <form [formGroup]='filtersForm' (ngSubmit)='submitForm()'>
 
-    <div class="filter-item" *ngFor="let filterItem of getItems$ | async; let i = index">
+    <div class="filter-item" *ngFor="let filterItem of getItems$ | async">
       <div class="input">
         <label><input type="checkbox" formControlName={{filterItem.strCategory}}></label>
       </div>
