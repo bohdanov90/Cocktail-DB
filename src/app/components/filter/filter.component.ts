@@ -1,9 +1,9 @@
 import { FilterItem } from './../../interfaces/filter-item';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -13,12 +13,9 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 
 export class FilterComponent implements OnInit {
-
   public filterItems: FilterItem[];
   public filtersForm: FormGroup;
-  public getItems$: Observable<Array<FilterItem>>;
-
-  @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
+  public getHeadings$: Observable<Array<FilterItem>>;
 
   constructor(
     private httpService: HttpService,
@@ -26,12 +23,12 @@ export class FilterComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {}
 
-  ngOnInit() {
-    this.getItems$ = this.httpService.getFilterItems$();
+  ngOnInit(): void {
+    this.getHeadings$ = this.httpService.getFilterItems$();
     this.createForm().subscribe();
   }
 
-  createForm() {
+  createForm(): Observable<FilterItem[]> {
     this.filtersForm = this.formBuilder.group({});
     return this.httpService.getFilterItems$()
     .pipe(
@@ -39,10 +36,7 @@ export class FilterComponent implements OnInit {
     );
   }
 
-  submitForm() {
-    console.log(this.filtersForm.value);
-    this.subjectService.passAnArray(this.filtersForm.value);
-    this.buttonClick.emit(this.filtersForm.value);
+  submitForm(): void {
+    this.subjectService.passData(this.filtersForm.value);
   }
-
 }

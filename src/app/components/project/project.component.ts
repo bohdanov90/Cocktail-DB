@@ -1,7 +1,4 @@
-import { FilterItem } from './../../interfaces/filter-item';
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { SubjectService } from '../../services/subject.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-project',
@@ -9,26 +6,4 @@ import { SubjectService } from '../../services/subject.service';
   styleUrls: ['./project.component.scss']
 })
 
-export class ProjectComponent implements OnInit {
-
-  public visible = false;
-  public hidden = true;
-  public filterItems: FilterItem[];
-
-  constructor(
-    private httpService: HttpService,
-    private subjectService: SubjectService,
-  ) {}
-
-  ngOnInit(): void {
-    // this.httpService.markAllFilters().subscribe(el => this.filterItems = el);
-    // this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
-  }
-
-  onButtonClick(): void {
-    // this.subjectService.getAnArray().subscribe(el => this.filterItems = el);
-    this.visible = true;
-    this.hidden = false;
-  }
-
-}
+export class ProjectComponent {}

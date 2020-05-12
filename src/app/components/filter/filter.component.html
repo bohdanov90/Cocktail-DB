@@ -2,11 +2,11 @@
 
   <form [formGroup]='filtersForm' (ngSubmit)='submitForm()'>
 
-    <div class="filter-item" *ngFor="let filterItem of getItems$ | async">
+    <div class="filter-item" *ngFor="let heading of getHeadings$ | async">
       <div class="input">
-        <label><input type="checkbox" formControlName={{filterItem.strCategory}}></label>
+        <label><input type="checkbox" formControlName={{heading.strCategory}}></label>
       </div>
-      <div class="text"> {{filterItem.strCategory}} </div>
+      <div class="text"> {{heading.strCategory}} </div>
     </div>
 
     <div class="filter-button">

@@ -5,22 +5,13 @@
   <div class="main">
 
     <div class="filter">
-      <app-filter 
-      (buttonClick)="onButtonClick()"
-      class="filter-bar"
-      ></app-filter>
+      <app-filter class="filter-bar"></app-filter>
     </div>
 
     <div class="content">
-      <app-content
-        [ngClass]="{
-          visible: visible,
-          hidden: hidden
-        }"
-      ></app-content>
+      <app-content></app-content>
     </div>
 
   </div>
 
 </div>
-

@@ -10,8 +10,6 @@ import { ContentItem } from '../interfaces/content-item';
 })
 
 export class HttpService {
-
-  // contentItems: ContentItem[] = []; // не используется
   queryFilters = 'drinks';
 
   constructor(private http: HttpClient) {}
@@ -29,5 +27,4 @@ export class HttpService {
         map(items => items[this.queryFilters]),
       );
   }
-
 }

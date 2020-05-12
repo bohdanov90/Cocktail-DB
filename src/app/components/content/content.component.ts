@@ -4,7 +4,7 @@ import { SubjectService } from '../../services/subject.service';
 import { HttpService } from '../../services/http.service';
 import { tap } from 'rxjs/operators';
 import { ContentItem } from '../../interfaces/content-item';
-import { Data } from '../../interfaces/data';
+import { ContentData } from '../../interfaces/content-data';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 
 export class ContentComponent implements OnInit {
   public getHeadings$: Observable<Array<FilterItem>>;
-  public contentItems: Data[] = [];
+  public contentItems: ContentData[] = [];
   public formValues: object = {};
 
   constructor(
@@ -23,8 +23,8 @@ export class ContentComponent implements OnInit {
     public httpService: HttpService,
   ) {}
 
-  ngOnInit() {
-    this.subjectService.getAnArray$().subscribe(el => this.formValues = el);
+  ngOnInit(): void {
+    this.subjectService.getData$().subscribe(el => this.formValues = el);
     this.getHeadings$ = this.httpService.getFilterItems$();
     this.getContent$().subscribe();
   }

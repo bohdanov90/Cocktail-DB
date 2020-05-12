@@ -6,17 +6,15 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 
 export class SubjectService {
-
-  public subject$: BehaviorSubject<any> = new BehaviorSubject(null);
+  public formValue$: BehaviorSubject<object> = new BehaviorSubject(null);
 
   constructor() {}
 
-  passAnArray(arr): void {
-    this.subject$.next(arr);
+  passData(data: object): void {
+    this.formValue$.next(data);
   }
 
-  getAnArray$(): Observable<any> {
-    return this.subject$.asObservable();
+  getData$(): Observable<object> {
+    return this.formValue$.asObservable();
   }
-
 }

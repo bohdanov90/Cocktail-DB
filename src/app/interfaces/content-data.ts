@@ -1,5 +1,5 @@
 import { ContentItem } from './content-item';
-export interface Data {
+export interface ContentData {
   title: string;
   data: ContentItem[];
 }
