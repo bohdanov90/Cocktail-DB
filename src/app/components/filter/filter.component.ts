@@ -15,7 +15,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 export class FilterComponent implements OnInit {
   public filterItems: FilterItem[];
   public filtersForm: FormGroup;
-  public getHeadings$: Observable<Array<FilterItem>>;
+  public headings$: Observable<Array<FilterItem>>;
 
   constructor(
     private httpService: HttpService,
@@ -24,7 +24,7 @@ export class FilterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getHeadings$ = this.httpService.getFilterItems$();
+    this.headings$ = this.httpService.getFilterItems$();
     this.createForm().subscribe();
   }
 
@@ -32,7 +32,7 @@ export class FilterComponent implements OnInit {
     this.filtersForm = this.formBuilder.group({});
     return this.httpService.getFilterItems$()
     .pipe(
-      tap(el => el.forEach(i => this.filtersForm.addControl(i.strCategory, new FormControl(true)))),
+      tap(filters => filters.forEach(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
     );
   }
 

@@ -1,6 +1,6 @@
-<div class="wrapper" *ngFor="let heading of getHeadings$ | async">
+<div class="wrapper" *ngFor="let heading of headings$ | async">
 
-  <div *ngIf="!!formValues && formValues[heading.strCategory] === true">
+  <div *ngIf="formValues && formValues[heading.strCategory]">
 
     <div class="heading"><strong>{{heading.strCategory}}</strong></div>
 

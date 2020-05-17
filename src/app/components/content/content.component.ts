@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 
 export class ContentComponent implements OnInit {
-  public getHeadings$: Observable<Array<FilterItem>>;
+  public headings$: Observable<Array<FilterItem>>;
   public contentItems: ContentData[] = [];
   public formValues: object = {};
 
@@ -25,11 +25,11 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.subjectService.getData$().subscribe(el => this.formValues = el);
-    this.getHeadings$ = this.httpService.getFilterItems$();
+    this.headings$ = this.httpService.getFilterItems$();
     this.getContent$().subscribe();
   }
 
-  saveContentItems$(drinkCategory: string): Observable<Array<ContentItem>> {
+  saveContentItems$(drinkCategory: string): Observable<ContentItem[]> {
     return this.httpService.getContentItems$(drinkCategory)
       .pipe(
         tap(el => this.contentItems = [...this.contentItems, {
@@ -39,10 +39,10 @@ export class ContentComponent implements OnInit {
       );
   }
 
-  getContent$(): Observable<Array<FilterItem>> {
+  getContent$(): Observable<FilterItem[]> {
     return this.httpService.getFilterItems$()
       .pipe(
-        tap(filters => filters.forEach(filter => this.saveContentItems$(filter.strCategory).subscribe())),
+        tap(filters => filters.map(filter => this.saveContentItems$(filter.strCategory).subscribe())),
       );
   }
 }
