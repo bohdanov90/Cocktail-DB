@@ -5,16 +5,16 @@ import { Observable, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 
-export class SubjectService {
+export class FormValuesService {
   public formValue$: BehaviorSubject<object> = new BehaviorSubject(null);
 
   constructor() {}
 
-  passData(data: object): void {
+  setValue(data: object): void {
     this.formValue$.next(data);
   }
 
-  getData$(): Observable<object> {
+  getValue$(): Observable<object> {
     return this.formValue$.asObservable();
   }
 }

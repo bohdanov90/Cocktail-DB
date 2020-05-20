@@ -1,9 +1,9 @@
 import { FilterItem } from './../../interfaces/filter-item';
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { SubjectService } from '../../services/subject.service';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NetworkService } from '../../services/network.service';
+import { FormValuesService } from '../../services/form-values.service';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -12,31 +12,38 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
   styleUrls: ['./filter.component.scss']
 })
 
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, OnDestroy {
   public filterItems: FilterItem[];
   public filtersForm: FormGroup;
   public headings$: Observable<Array<FilterItem>>;
+  private onDestroy$: Subject<void> = new Subject<void>();
 
   constructor(
-    private httpService: HttpService,
-    private subjectService: SubjectService,
+    private networkService: NetworkService,
+    private formValuesService: FormValuesService,
     private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
-    this.headings$ = this.httpService.getFilterItems$();
+    this.headings$ = this.networkService.getFilterItems$();
     this.createForm().subscribe();
   }
 
-  createForm(): Observable<FilterItem[]> {
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
+
+  createForm(): Observable<void> {
     this.filtersForm = this.formBuilder.group({});
-    return this.httpService.getFilterItems$()
+    return this.networkService.getFilterItems$()
     .pipe(
-      tap(filters => filters.forEach(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
+      map(filters => filters.forEach(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
+      takeUntil(this.onDestroy$),
     );
   }
 
   submitForm(): void {
-    this.subjectService.passData(this.filtersForm.value);
+    this.formValuesService.setValue(this.filtersForm.value);
   }
 }

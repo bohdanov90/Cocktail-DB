@@ -9,7 +9,7 @@ import { ContentItem } from '../interfaces/content-item';
   providedIn: 'root'
 })
 
-export class HttpService {
+export class NetworkService {
   queryFilters = 'drinks';
 
   constructor(private http: HttpClient) {}
@@ -17,14 +17,14 @@ export class HttpService {
   getFilterItems$(): Observable<Array<FilterItem>> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
       .pipe(
-        map(items => items[this.queryFilters]),
+        map(response => response[this.queryFilters]),
       );
   }
 
   getContentItems$(drinkCategory: string): Observable<Array<ContentItem>> {
     return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`)
       .pipe(
-        map(items => items[this.queryFilters]),
+        map(response => response[this.queryFilters]),
       );
   }
 }

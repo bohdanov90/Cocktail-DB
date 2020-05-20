@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SubjectService } from './subject.service';
+import { FormValuesService } from './form-values.service';
 
 describe('ShareService', () => {
-  let service: SubjectService;
+  let service: FormValuesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SubjectService);
+    service = TestBed.inject(FormValuesService);
   });
 
   it('should be created', () => {
