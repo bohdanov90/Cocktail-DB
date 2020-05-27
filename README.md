@@ -6,10 +6,11 @@
 
 &nbsp;&nbsp; Created using RxJS, Angular2+ and TypeScript.
 
-**Link to Demo:** [Cocktail-DB](https://i.imgur.com/SlRDVKQ.gifv "Cocktail-DB")
+**Link to Demo:** [Cocktail-DB](https://bohdanov90.github.io/Cocktail-DB/ "Cocktail-DB")
+
 
 **Tags:** _RxJS_, _Angular2+_, _TypeScript_, _PSD to HTML_ 
 
 ---
 
-![projectScreenshot](https://github.com/bohdanov90/My-Portfolio/blob/master/images/works-screen/cocktail-DB.jpg "Cocktail-DB Screenshot")
+![Cocktail-DB](https://i.imgur.com/eXtGBbr.gif)
