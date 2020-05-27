@@ -9,8 +9,6 @@
 **Link to Demo:** [Cocktail-DB](https://bohdanov90.github.io/Cocktail-DB/ "Cocktail-DB")
 
 
-**Tags:** _RxJS_, _Angular2+_, _TypeScript_, _PSD to HTML_ 
-
----
+**Tags:** _RxJS_, _Angular2+_, _TypeScript_, _PSD to HTML_
 
 ![Cocktail-DB](https://i.imgur.com/eXtGBbr.gif)
