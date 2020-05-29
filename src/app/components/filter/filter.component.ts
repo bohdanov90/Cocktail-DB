@@ -34,11 +34,11 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  createForm(): Observable<void> {
+  createForm() {
     this.filtersForm = this.formBuilder.group({});
     return this.networkService.getFilterItems$()
     .pipe(
-      map(filters => filters.forEach(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
+      map(filters => filters.map(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
       takeUntil(this.onDestroy$),
     );
   }
