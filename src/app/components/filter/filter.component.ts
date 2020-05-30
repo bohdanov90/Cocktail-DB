@@ -13,8 +13,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 
 export class FilterComponent implements OnInit, OnDestroy {
-  public filterItems: FilterItem[];
-  public filtersForm: FormGroup;
+  public filtersForm: FormGroup = this.formBuilder.group({});
   public headings$: Observable<Array<FilterItem>>;
   private onDestroy$: Subject<void> = new Subject<void>();
 
@@ -34,8 +33,7 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  createForm() {
-    this.filtersForm = this.formBuilder.group({});
+  createForm(): Observable<void[]> {
     return this.networkService.getFilterItems$()
     .pipe(
       map(filters => filters.map(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
