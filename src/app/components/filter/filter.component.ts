@@ -5,6 +5,7 @@ import { FormValuesService } from '../../services/form-values.service';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-filter',
@@ -21,6 +22,7 @@ export class FilterComponent implements OnInit, OnDestroy {
     private networkService: NetworkService,
     private formValuesService: FormValuesService,
     private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
@@ -43,5 +45,6 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     this.formValuesService.setValue(this.filtersForm.value);
+    this.loaderService.showSpinner();
   }
 }

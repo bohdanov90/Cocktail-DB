@@ -1,10 +1,12 @@
-import { FilterItem } from './../../interfaces/filter-item';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormValuesService } from '../../services/form-values.service';
 import { NetworkService } from '../../services/network.service';
-import { concatAll, map, mergeMap, takeUntil } from 'rxjs/operators';
+import { concatAll, map, mergeMap, takeUntil, tap, filter } from 'rxjs/operators';
 import { ContentData } from '../../interfaces/content-data';
 import { Observable, Subject } from 'rxjs';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-content',
@@ -13,24 +15,26 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class ContentComponent implements OnInit, OnDestroy {
-  public headings$: Observable<Array<FilterItem>>;
-  public contentItems: ContentData[] = [];
-  public formValues: object = {};
+  public cocktails: ContentData[][] = [];
+  public currentPage: ContentData[][];
+  public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.cocktails);
+  public paginatorLength: number;
+  public paginatorPageIndex: number;
   private onDestroy$: Subject<void> = new Subject<void>();
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
-    public formValuesService: FormValuesService,
-    public networkService: NetworkService,
+    private formValuesService: FormValuesService,
+    private networkService: NetworkService,
+    public loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
-    this.formValuesService.getValue$()
-      .pipe(
-        takeUntil(this.onDestroy$),
-      )
-      .subscribe(filters => this.formValues = filters);
-    this.headings$ = this.networkService.getFilterItems$();
-    this.getContent$().subscribe();
+    this.getValues$().subscribe(categories => {
+      this.cocktails = [...this.cocktails, categories];
+      this.setPaginatorData();
+    });
   }
 
   ngOnDestroy(): void {
@@ -38,22 +42,38 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  saveContentItems$(drinkCategory: string): Observable<ContentData[]> {
-    return this.networkService.getContentItems$(drinkCategory)
-      .pipe(
-        map(drinks => this.contentItems = [
-          ...this.contentItems,
-          {title: drinkCategory, data: drinks}
-        ]),
-      );
+  getValues$(): Observable<ContentData[]> {
+    return this.formValuesService.getValue$()
+    .pipe(
+      tap(() => this.cocktails = []),
+      filter(formValues => !!formValues),
+      map(formValues => Object.entries(formValues)
+        .map((el: object) => el[0] = {title: el[0], display: el[1]})
+        .filter(category => category.display === true)
+      ),
+      mergeMap(categories => categories.map(category => this.networkService.getContentItems$(category.title)
+        .pipe(
+          map(cocktails => [{...category, data: cocktails}]),
+        )
+      )),
+      concatAll(),
+      takeUntil(this.onDestroy$),
+    );
   }
 
-  getContent$(): Observable<FilterItem[] | ContentData[]> {
-    return this.networkService.getFilterItems$()
-      .pipe(
-        mergeMap(filters => filters.map(filter => this.saveContentItems$(filter.strCategory))),
-        concatAll(),
-        takeUntil(this.onDestroy$),
-      );
+  setPaginatorData(): void {
+    this.dataSource.paginator = this.paginator;
+    this.paginatorLength = this.cocktails.length;
+    this.currentPage = this.cocktails.slice(0, 1);
+  }
+
+  OnPageChange(event: PageEvent): void {
+    const paginatorStartIndex = event.pageIndex;
+    let paginatorEndIndex = paginatorStartIndex + event.pageSize;
+    if (paginatorEndIndex > this.paginatorLength) {
+      paginatorEndIndex = this.paginatorLength;
+    }
+    this.paginatorPageIndex = event.pageIndex;
+    this.currentPage = this.cocktails.slice(paginatorStartIndex, paginatorEndIndex);
   }
 }

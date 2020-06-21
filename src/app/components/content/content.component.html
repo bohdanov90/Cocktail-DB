@@ -1,52 +1,38 @@
-<div class="wrapper" *ngFor="let heading of headings$ | async">
+<div *ngIf='loaderService.isShowSpinner === true; else content'>
+  <mat-spinner></mat-spinner>
+</div>
 
-  <div *ngIf="formValues && formValues[heading.strCategory]">
+<ng-template #content>
 
-    <div class="heading"><strong>{{heading.strCategory}}</strong></div>
+  <div class="wrapper" *ngFor="let cocktail of cocktails">
 
-    <hr class="hr">
+    <div *ngIf="cocktail === currentPage[0]">
 
-    <div *ngFor="let category of contentItems">
+      <div class="heading"><strong>{{cocktail[0].title}}</strong></div>
 
-      <div *ngIf="heading.strCategory === category.title">
+      <mat-divider></mat-divider>
 
-        <div class="container" *ngFor="let recipe of category.data; let index = index">
+      <mat-paginator
+        [length]='paginatorLength'
+        [pageIndex]='paginatorPageIndex'
+        pageSize = 1
+        showFirstLastButtons
+        (page)='OnPageChange($event)'>
+      </mat-paginator>
 
-          <div class="row" *ngIf="index % 5 === 0">
-
-            <div class="item">
-              <div class="img-wrapper"><img src="{{recipe.strDrinkThumb}}" alt=""></div>
-              <div class="item-title">{{recipe.strDrink}}</div>
-            </div>
-
-            <div class="item" *ngIf="(index + 1) < category.data.length">
-              <div class="img-wrapper"><img src="{{category.data[index + 1].strDrinkThumb}}" alt=""></div>
-              <div class="item-title">{{category.data[index + 1].strDrink}}</div>
-            </div>
-
-            <div class="item" *ngIf="(index + 2) < category.data.length">
-              <div class="img-wrapper"><img src="{{category.data[index + 2].strDrinkThumb}}" alt=""></div>
-              <div class="item-title">{{category.data[index + 2].strDrink}}</div>
-            </div>
-
-            <div class="item" *ngIf="(index + 3) < category.data.length">
-              <div class="img-wrapper"><img src="{{category.data[index + 3].strDrinkThumb}}" alt=""></div>
-              <div class="item-title">{{category.data[index + 3].strDrink}}</div>
-            </div>
-
-            <div class="item" *ngIf="(index + 4) < category.data.length">
-              <div class="img-wrapper"><img src="{{category.data[index + 4].strDrinkThumb}}" alt=""></div>
-              <div class="item-title">{{category.data[index + 4].strDrink}}</div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
+      <mat-grid-list cols='5' rowHeight='5:6' gutterSize='5px' style="width: 900px">
+        <mat-grid-tile *ngFor="let recipe of cocktail[0].data">
+          <mat-card style="width: 120px">
+            <img mat-card-sm-image src="{{recipe.strDrinkThumb}}" alt="">
+            <mat-card-content style="width:120px">
+              <p style="width:120px; font-size: 0.75rem;">{{recipe.strDrink}}</p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
 
     </div>
 
   </div>
 
-</div>
+</ng-template>
