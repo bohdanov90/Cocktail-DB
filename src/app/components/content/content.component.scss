@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+:host ::ng-deep mat-spinner {
+  position: fixed;
+  top: 46%;
+  right: 37%;
+}
+
 .wrapper {
   box-sizing: border-box;
   width: 100%;
