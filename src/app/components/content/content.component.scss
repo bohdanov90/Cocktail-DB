@@ -7,67 +7,39 @@
 
   .heading {
     width: 100%;
-    padding: 15px 0;
-    margin-top: 20px;
+    padding: 2vh 0;
+    margin-top: 2vh;
     font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 2vw;
     color: #818181;
   }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  mat-paginator {
+    font-size: 1vw;
   }
 
-    .row {
-      display: flex;
-      width: 100%;
-      height: auto;
+    :host ::ng-deep .mat-paginator-icon {
+      width: 1.75vw;
     }
 
-      .item {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        width: 150px;
-        height: 180px;
-        margin: 10px 50px 10px 0;
-        box-sizing: border-box;
+  mat-card {
+    width: 20vw;
+  }
+
+    .mat-card-img-container {
+      height: 80%;
+      width: 100%;
+      padding-bottom: 1vh;
+    }
+
+      .mat-card-img {
+        height: 100%;
+        width: 100%;
       }
 
-      .item:last-child {
-        margin: 10px 0;
-      }
-
-        .img-wrapper {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          height: 150px;
-        }
-
-          img {
-            height: 100%;
-            width: 100%;
-            padding-bottom: 5px;
-          }
-
-        .item-title {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          width: 100%;
-          height: 30px;
-          white-space: nowrap;
-          font-family: 'Roboto', sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 14px;
-          line-height: 21px;
-          color: #000000;
-        }
+    mat-card-content {
+      height: 20%;
+      width: 100%;
+      font-size: 0.75vw;
+      text-align: center;
+    }

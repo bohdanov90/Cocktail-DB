@@ -3,36 +3,32 @@
 </div>
 
 <ng-template #content>
-
-  <div class="wrapper" *ngFor="let cocktail of cocktails">
-
+  <ng-container class="wrapper" *ngFor="let cocktail of cocktails">
     <div *ngIf="cocktail === currentPage[0]">
-
       <div class="heading"><strong>{{cocktail[0].title}}</strong></div>
-
       <mat-divider></mat-divider>
 
       <mat-paginator
         [length]='paginatorLength'
         [pageIndex]='paginatorPageIndex'
         pageSize = 1
-        showFirstLastButtons
-        (page)='OnPageChange($event)'>
+        (page)='OnPageChange($event)'
+      >
       </mat-paginator>
 
-      <mat-grid-list cols='5' rowHeight='5:6' gutterSize='2vw' style="width: 900px">
+      <mat-grid-list cols='5' rowHeight='5:6' gutterSize='2vw' style="width: 70vw">
         <mat-grid-tile *ngFor="let recipe of cocktail[0].data">
-          <mat-card style="width: 120px">
-            <img mat-card-sm-image src="{{recipe.strDrinkThumb}}" alt="">
-            <mat-card-content style="width:120px">
-              <p style="width:120px; font-size: 0.75rem;">{{recipe.strDrink}}</p>
+          <mat-card>
+            <div class="mat-card-img-container">
+              <img class="mat-card-img" mat-card-sm-image src="{{recipe.strDrinkThumb}}" alt="">
+            </div>
+            <mat-card-content>
+              <div> {{recipe.strDrink}} </div>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
       </mat-grid-list>
 
     </div>
-
-  </div>
-
+  </ng-container>
 </ng-template>
