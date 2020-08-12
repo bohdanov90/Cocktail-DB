@@ -10,21 +10,21 @@ import { ContentItem } from '../interfaces/content-item';
 })
 
 export class NetworkService {
-  queryFilters = 'drinks';
+  private drinks = 'drinks';
 
   constructor(private http: HttpClient) {}
 
   getFilterItems$(): Observable<Array<FilterItem>> {
     return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
       .pipe(
-        map(response => response[this.queryFilters]),
+        map(response => response[this.drinks]),
       );
   }
 
   getContentItems$(drinkCategory: string): Observable<Array<ContentItem>> {
     return this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinkCategory}`)
       .pipe(
-        map(response => response[this.queryFilters]),
+        map(response => response[this.drinks]),
       );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { FormValuesService } from '../../services/form-values.service';
 import { NetworkService } from '../../services/network.service';
 import { concatAll, map, mergeMap, takeUntil, tap, filter } from 'rxjs/operators';
@@ -14,15 +14,16 @@ import { LoaderService } from 'src/app/services/loader.service';
   styleUrls: ['./content.component.scss'],
 })
 
-export class ContentComponent implements OnInit, OnDestroy {
+export class ContentComponent implements AfterViewInit, OnDestroy {
   public cocktails: ContentData[][] = [];
   public currentPage: ContentData[][];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.cocktails);
   public paginatorLength: number;
   public paginatorPageIndex: number;
-  private onDestroy$: Subject<void> = new Subject<void>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  private onDestroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private formValuesService: FormValuesService,
@@ -30,7 +31,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     public loaderService: LoaderService,
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getValues$().subscribe(categories => {
       this.cocktails = [...this.cocktails, categories];
       this.setPaginatorData();
@@ -46,6 +47,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     return this.formValuesService.getValue$()
     .pipe(
       tap(() => this.cocktails = []),
+      tap(() => !!this.paginator ? this.paginator.firstPage() : null),
       filter(formValues => !!formValues),
       map(formValues => Object.entries(formValues)
         .map((el: object) => el[0] = {title: el[0], display: el[1]})

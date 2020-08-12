@@ -3,8 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NetworkService } from '../../services/network.service';
 import { FormValuesService } from '../../services/form-values.service';
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { takeUntil, filter, tap } from 'rxjs/operators';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { LoaderService } from '../../services/loader.service';
 
 @Component({
@@ -35,10 +35,11 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  createForm(): Observable<void[]> {
+  createForm(): Observable<FilterItem[]> {
     return this.networkService.getFilterItems$()
     .pipe(
-      map(filters => filters.map(filter => this.filtersForm.addControl(filter.strCategory, new FormControl(true)))),
+      filter(drinks => !!drinks),
+      tap(drinks => drinks.map(drink => this.filtersForm.addControl(drink?.strCategory, this.formBuilder.control(true)))),
       takeUntil(this.onDestroy$),
     );
   }
